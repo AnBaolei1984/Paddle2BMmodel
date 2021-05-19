@@ -1,4 +1,4 @@
 # model load config
-model_path  zl_yolov3_darknet
-input_shapes 1,3,608,608:1,2
+model_path  VGG16
+input_shapes 1,3,224,224
 

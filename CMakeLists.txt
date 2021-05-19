@@ -3,8 +3,8 @@ project(demo CXX C)
 
 set(TARGET p2u)
 # 1. lib & include
-link_directories(${PROJECT_SOURCE_DIR}/inference_lite_lib/lib ${PROJECT_SOURCE_DIR}/inference_lite_lib/lib/third_party)
-include_directories(${PROJECT_SOURCE_DIR}/inference_lite_lib/include)
+link_directories(${PROJECT_SOURCE_DIR}/inference_lite_lib/cxx/lib ${PROJECT_SOURCE_DIR}/inference_lite_lib/cxx/lib/third_party)
+include_directories(${PROJECT_SOURCE_DIR}/inference_lite_lib/cxx/include)
 # 2. compile options 
 add_definitions(-std=c++11 -g -O3 -DNDEBUG -pthread)
 #add_definitions(-g  )
