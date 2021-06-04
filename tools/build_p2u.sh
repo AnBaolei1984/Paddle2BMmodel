@@ -1,6 +1,6 @@
 mkdir ./build
 cd ./build
-cmake ..
+cmake .. -DPADDLE_TO_UMODEL=ON
 make
 cd ..
 rm -rf ./build
