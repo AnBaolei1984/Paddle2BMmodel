@@ -4,9 +4,9 @@
 
 1. 下载inference lib
 
-    链接: https://pan.baidu.com/s/1PLsGHHzozcyAcqATyUkHvA  密码: dtt5
+    链接: https://pan.baidu.com/s/1HVzGnxXzKWpg4dC6w3ksvA  密码: cw41
     
-    下载后拷贝到，当前工程目录下
+    下载后拷贝到Paddle2BMmodel目录下
   
 2. 在比特大陆bmnnsdk2-bm1684目录，执行下面的命令（主要是设置环境变量，每开一次终端需要重新执行）：
 
