@@ -4,7 +4,7 @@
 
 1. 下载inference lib
 
-    链接: https://pan.baidu.com/s/1HVzGnxXzKWpg4dC6w3ksvA  密码: cw41
+    链接: https://pan.baidu.com/s/1KIYZ1Uvr7cJH7QKwlwZSgg  密码: 8oat
     
     下载后拷贝到Paddle2BMmodel目录下
   
