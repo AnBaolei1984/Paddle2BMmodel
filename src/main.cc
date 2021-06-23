@@ -22,8 +22,8 @@ using namespace paddle::lite_api;  // NOLINT
 
 void ConvertModel(Config config_obj) {
   CxxConfig config;
-  config.set_model_file(config_obj.model_path_ + "/model.pdmodel");
-  config.set_param_file(config_obj.model_path_ + "/model.pdiparams");
+  config.set_model_file(config_obj.model_path_ + "/model");
+  config.set_param_file(config_obj.model_path_ + "/params");
   config.set_valid_places({Place{TARGET(kBM), PRECISION(kFloat)},
                            Place{TARGET(kHost), PRECISION(kFloat)}});
 
