@@ -6,10 +6,6 @@ import os
 def fetch_tmp_vars(block, fetch_targets, var_names_list = None):
   """
   """
-  if len(var_names_list) == 0:
-    print('if select front part, fetch_targets should set node name!!!')
-    exit(0)
-
   def var_names_of_fetch(fetch_targets):
     var_names_list = []
     for var in fetch_targets:
@@ -36,29 +32,27 @@ def fetch_tmp_vars(block, fetch_targets, var_names_list = None):
         i = i + 1
   return new_fetch_vars
 
-def fluid_inference(model_path, image_size, is_front):
+def fluid_inference(model_path):
     exe = fluid.Executor(fluid.CPUPlace())
     [inference_program, feed_target_names, fetch_targets] = fluid.io.load_inference_model(model_path, exe, os.path.join(model_path, 'model'), os.path.join(model_path, 'params'))
-    print ("----") 
     global_block = inference_program.global_block()
-    if is_front == 1:
-      ## [] set node name
-      fetch_targets = fetch_tmp_vars(global_block, fetch_targets, ['squeeze_0.tmp_0']) 
-    print (fetch_targets)
-    with fluid.program_guard(inference_program):
-      if is_front == 1:
-        fluid.io.save_inference_model('./save_model', feeded_var_names = feed_target_names, target_vars=fetch_targets, executor = exe)
-      else:
-        fluid.io.save_inference_model('./save_model', feeded_var_names = ['squeeze_0.tmp_0'], target_vars=fetch_targets, executor = exe)
+    # seg_node_names = ['squeeze_0.tmp_0']
+    seg_node_names = []
 
-if len(sys.argv) < 5:
-    raise NameError('Usage: python ./infer_image.py path/to/model input_width input_height is_front')
+    if len(seg_node_names) == 0:
+      print('Segment node names must be set!!!')
+      exit(0)
+
+    second_fetch_targets = fetch_tmp_vars(global_block, fetch_targets, seg_node_names)
+    with fluid.program_guard(inference_program):
+      fluid.io.save_inference_model('./first_model', feeded_var_names = feed_target_names, target_vars = second_fetch_targets, executor = exe)
+      fluid.io.save_inference_model('./second_model', feeded_var_names = seg_node_names, target_vars = fetch_targets, executor = exe)
+    print ("The model was segmented successful :) :) :)") 
+
+if len(sys.argv) < 2:
+    raise NameError('Usage: python ./infer_image.py path/to/model')
 
 model_path = sys.argv[1]
-input_width = int(sys.argv[2])
-input_height = int(sys.argv[3])
-is_front = int(sys.argv[4])
-image_size = (input_width, input_height)
 paddle.enable_static()
-fluid_inference(model_path, image_size, is_front)
-    
+fluid_inference(model_path)
+
