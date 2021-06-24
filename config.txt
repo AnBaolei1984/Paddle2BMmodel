@@ -1,4 +1,5 @@
 # model load config
-model_path  alcn
-input_shapes 1,3,960,960
-
+model_path  first_model
+input_shapes 1,3,32,128
+# 0: model+ params 1 __model__ + param files
+model_format 0

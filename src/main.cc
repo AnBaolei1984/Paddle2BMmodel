@@ -22,12 +22,12 @@ using namespace paddle::lite_api;  // NOLINT
 
 void ConvertModel(Config config_obj) {
   CxxConfig config;
-#if 1
+  if (config_obj.model_format_ == "0") {
   config.set_model_file(config_obj.model_path_ + "/model");
   config.set_param_file(config_obj.model_path_ + "/params");
-#else // for __model__
+  } else {
   config.set_model_dir(config_obj.model_path_);
-#endif 
+  }
  
  
   config.set_valid_places({Place{TARGET(kBM), PRECISION(kFloat)},

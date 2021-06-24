@@ -32,6 +32,7 @@ public:
     PrintConfigInfo();
 
     this->model_path_ = config_map_["model_path"];
+    this->model_format_ = config_map_["model_format"];
     auto str_input_shapes = config_map_["input_shapes"];
     auto str_input_shape = split(str_input_shapes, ":");
     for (size_t i = 0; i < str_input_shape.size(); i++) {
@@ -45,6 +46,7 @@ public:
   }
 
   std::string model_path_;
+  std::string model_format_;
   std::vector<std::vector<int> > input_shapes_;
 
 private:
