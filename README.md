@@ -32,9 +32,11 @@
 
       编译成功后生成p2u的可执行文件
   
-4. 在config.txt设定模型的输入shape和路径
+4. 在config.txt设定模型的路径、输入shape、格式
 
-   多个输入的情况，不同shape以:为分隔符, 如1,3,608,608:300,300
+   1）多个输入的情况，不同shape以:为分隔符, 如1,3,608,608:300,300
+   
+   2）model+params形式存放的模型，model_format设成0,__model__的形式，model_format设成1
 
 5. 执行 ./p2u config.txt 或./p2b config.txt就可以完成转换
 
