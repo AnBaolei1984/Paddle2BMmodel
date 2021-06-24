@@ -15,28 +15,27 @@ def fetch_tmp_vars(block, fetch_targets, var_names_list = None):
   fetch_var = block.var('fetch')
   old_fetch_names = var_names_of_fetch(fetch_targets)
   new_fetch_vars = []
-  for var_name in old_fetch_names:
-    var = block.var(var_name)
-    i = len(new_fetch_vars)
-    if var_names_list is None:
-      var_names_list = block.vars.keys()
-    for var_name in var_names_list:
-      if var_name != '' and var_name not in old_fetch_names:
-        var = block.var(var_name)
-        new_fetch_vars.append(var)
-        block.append_op(
+
+  i = 0
+  if var_names_list is None:
+    var_names_list = block.vars.keys()
+  for var_name in var_names_list:
+    if var_name != '' and var_name not in old_fetch_names:
+      var = block.var(var_name)
+      new_fetch_vars.append(var)
+      block.append_op(
                 type='fetch',
                 inputs={'X': [var_name]},
                 outputs={'Out': [fetch_var]},
                 attrs={'col': i})
-        i = i + 1
+      i = i + 1
   return new_fetch_vars
 
 def fluid_inference(model_path):
     exe = fluid.Executor(fluid.CPUPlace())
     [inference_program, feed_target_names, fetch_targets] = fluid.io.load_inference_model(model_path, exe, os.path.join(model_path, 'model'), os.path.join(model_path, 'params'))
     global_block = inference_program.global_block()
-    # seg_node_names = ['squeeze_0.tmp_0']
+    #seg_node_names = ['squeeze_0.tmp_0']
     seg_node_names = []
 
     if len(seg_node_names) == 0:
