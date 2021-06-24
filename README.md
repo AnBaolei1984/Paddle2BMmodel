@@ -38,7 +38,6 @@
 
 5. 执行 ./p2u config.txt 或./p2b config.txt就可以完成转换
 
-
 # 2. 模型拆分（如需要）
 
   对于一些后处理部分或其它算子不支持的模型，可以考虑将其进行拆分，模型前半部分转换成bmodel在TPU上运行，后半部分通过Paddle inference（X86）或Paddle-Lite(arm)在cpu上执行。
